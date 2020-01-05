@@ -25,13 +25,22 @@ func NewGameInfo() *GameInfo {
 func (g *GameInfo) SetInfo(game *api.Game) {
 	g.Clear()
 
-	ord := "th"
+	if strings.Contains(game.Qtr, "final") || game.Qtr == "Final" {
+		game.Clock = ""
+		game.Pos = ""
+	}
+
+	down := strconv.Itoa(game.Down)
+	togo := strconv.Itoa(game.ToGo)
+	downStr := ""
 	if game.Down == 1 {
-		ord = "st"
+		downStr = down + "st and " + togo
 	} else if game.Down == 2 {
-		ord = "nd"
+		downStr = down + "nd and " + togo
 	} else if game.Down == 3 {
-		ord = "rd"
+		downStr = down + "rd and " + togo
+	} else if game.Down == 4 {
+		downStr = down + "th and " + togo
 	}
 
 	g.SetHeaderCell(0, 0, "Quarter:").
@@ -42,7 +51,7 @@ func (g *GameInfo) SetInfo(game *api.Game) {
 
 	g.SetTextCell(0, 1, strings.Title(game.Qtr)).
 		SetTextCell(1, 1, game.Clock).
-		SetTextCell(2, 1, strconv.Itoa(game.Down)+ord+" and "+strconv.Itoa(game.ToGo)).
+		SetTextCell(2, 1, downStr).
 		SetTextCell(3, 1, game.Pos).
 		SetTextCell(4, 1, game.Yl)
 }
