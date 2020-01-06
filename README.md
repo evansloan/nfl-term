@@ -15,17 +15,21 @@ go >= 1.12.7
 
 ### Installing
 
+Download the latest release for your system from this repo's [releases page](https://github.com/evansloan/nfl-term/releases).
+
+#### From Source
+
 Clone the repo:
 
 ```
 $ git clone https://github.com/evansloan/nfl-term.git
 ```
 
-Run the install script:
+Run the Makefile:
 
 ```
 $ cd nfl-term
-$ ./install.sh
+$ make install
 ```
 
 Run nfl-term

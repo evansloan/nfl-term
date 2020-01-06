@@ -8,7 +8,6 @@ import (
 
 var (
 	version string
-	commit  string
 )
 
 func main() {
@@ -16,8 +15,7 @@ func main() {
 	if len(os.Args) > 1 {
 		arg := os.Args[1]
 		if strings.ToLower(arg) == "version" {
-			fmt.Println("Version: ", version)
-			fmt.Println("Commit: ", commit)
+			fmt.Println("nfl-term version: ", version)
 			os.Exit(3)
 		}
 	}
