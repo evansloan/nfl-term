@@ -28,6 +28,8 @@ func NewPlayerStats(title string, statType int) *PlayerStats {
 		GenericTable: NewGenericTable(title),
 	}
 
+	p.SetFixed(1, 0)
+
 	if statType == 0 {
 		p.setHandler(p.setPassStats)
 	} else if statType == 1 {
