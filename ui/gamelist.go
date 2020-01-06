@@ -5,7 +5,7 @@ import (
 )
 
 // GameList represents a UI element that displays
-// a selectable list of upcoming/ongoing/recently ended 
+// a selectable list of upcoming/ongoing/recently ended
 // NFL games.
 // Inherits from tview.List
 type GameList struct {
@@ -14,12 +14,12 @@ type GameList struct {
 
 // NewGameList creates a new GameList UI element
 func NewGameList() *GameList {
-	gameList := &GameList{
+	g := &GameList{
 		List: tview.NewList(),
 	}
-	gameList.ShowSecondaryText(false)
-	gameList.SetBorder(true).
+	g.ShowSecondaryText(false)
+	g.SetBorder(true).
 		SetTitle("Games")
 
-	return gameList
+	return g
 }

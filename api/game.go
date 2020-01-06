@@ -46,6 +46,7 @@ type Team struct {
 		Passing   map[string]Player `json:"passing"`
 		Rushing   map[string]Player `json:"rushing"`
 		Receiving map[string]Player `json:"receiving"`
+		Defense   map[string]Player `json:"defense:`
 		Team      struct {
 			FirstDowns int    `json:"totfd"`
 			TotalYards int    `json:"totyds"`
@@ -66,9 +67,14 @@ type Player struct {
 	Rec       int    `json:"rec"`
 	Yards     int    `json:"yds"`
 	Tds       int    `json:"tds"`
-	Ints      int    `json:"ints"`
+	IntsO     int    `json:"ints"`
 	TwoPtAtt  int    `json:"twopta"`
 	TwoPtConv int    `json:"twoptm"`
+	Tkl       int    `json:"tkl"`
+	Ast       int    `json:"ast"`
+	Sacks     int    `json:"sck"`
+	IntsD     int    `json:"int"`
+	Ffum      int    `json:"ffum"`
 }
 
 // GetGame retrieves a specific NFL game that is in progress,
@@ -76,8 +82,8 @@ type Player struct {
 //
 // The ID for the game is structured like so:
 //
-//	2020 (year) +  01 (month) + 04 (day) + 01 (game number 00-16)
-//  = 2020010401
+// 2020 (year) +  01 (month) + 04 (day) + 01 (game number 00-16)
+// = 2020010401
 func GetGame(id string) *Game {
 	apiURL := "http://www.nfl.com/liveupdate/game-center/" + id + "/" + id + "_gtd.json"
 

@@ -34,6 +34,8 @@ func NewPlayerStats(title string, statType int) *PlayerStats {
 		p.setHandler(p.setRushStats)
 	} else if statType == 2 {
 		p.setHandler(p.setRecvStats)
+	} else if statType == 3 {
+		p.setHandler(p.setDefStats)
 	}
 
 	return p
@@ -56,7 +58,7 @@ func (p *PlayerStats) setPassStats(game *api.Game) {
 		SetHeaderCell(0, 4, "TDs").
 		SetHeaderCell(0, 5, "Ints")
 
-	stats := sortPlayers(game.Home.Stats.Passing, game.Away.Stats.Passing)
+	stats := sortPlayers(game.Home.Stats.Passing, game.Away.Stats.Passing, 0)
 
 	for i, player := range stats {
 		p.SetTextCell(i+1, 0, player.Name).
@@ -64,7 +66,7 @@ func (p *PlayerStats) setPassStats(game *api.Game) {
 			SetIntCell(i+1, 2, player.Att).
 			SetIntCell(i+1, 3, player.Yards).
 			SetIntCell(i+1, 4, player.Tds).
-			SetIntCell(i+1, 5, player.Ints)
+			SetIntCell(i+1, 5, player.IntsO)
 	}
 }
 
@@ -78,7 +80,7 @@ func (p *PlayerStats) setRushStats(game *api.Game) {
 		SetHeaderCell(0, 2, "Yards").
 		SetHeaderCell(0, 3, "TDs")
 
-	stats := sortPlayers(game.Home.Stats.Rushing, game.Away.Stats.Rushing)
+	stats := sortPlayers(game.Home.Stats.Rushing, game.Away.Stats.Rushing, 0)
 
 	for i, player := range stats {
 		p.SetTextCell(i+1, 0, player.Name).
@@ -98,7 +100,7 @@ func (p *PlayerStats) setRecvStats(game *api.Game) {
 		SetHeaderCell(0, 2, "Yards").
 		SetHeaderCell(0, 3, "TDs")
 
-	stats := sortPlayers(game.Home.Stats.Receiving, game.Away.Stats.Receiving)
+	stats := sortPlayers(game.Home.Stats.Receiving, game.Away.Stats.Receiving, 0)
 
 	for i, player := range stats {
 		p.SetTextCell(i+1, 0, player.Name).
@@ -106,12 +108,36 @@ func (p *PlayerStats) setRecvStats(game *api.Game) {
 			SetIntCell(i+1, 2, player.Yards).
 			SetIntCell(i+1, 3, player.Tds)
 	}
+}
 
+// setDefStats populates the UI element with receivings stats
+// from a specific NFL game.
+func (p *PlayerStats) setDefStats(game *api.Game) {
+	p.Clear()
+
+	p.SetHeaderCell(0, 0, "Name").
+		SetHeaderCell(0, 1, "Tkls").
+		SetHeaderCell(0, 2, "Asts").
+		SetHeaderCell(0, 3, "Sacks").
+		SetHeaderCell(0, 4, "Ints").
+		SetHeaderCell(0, 5, "FFum")
+
+	stats := sortPlayers(game.Home.Stats.Defense, game.Away.Stats.Defense, 1)
+
+	for i, player := range stats {
+		p.SetTextCell(i+1, 0, player.Name).
+			SetIntCell(i+1, 1, player.Tkl).
+			SetIntCell(i+1, 2, player.Ast).
+			SetIntCell(i+1, 3, player.Sacks).
+			SetIntCell(i+1, 4, player.IntsD).
+			SetIntCell(i+1, 5, player.Ffum)
+	}
+	p.ScrollToBeginning()
 }
 
 // sortPlayers sorts players by passing/rushing/receiving yards
 // in descending order.
-func sortPlayers(home map[string]api.Player, away map[string]api.Player) []api.Player {
+func sortPlayers(home, away map[string]api.Player, statType int) []api.Player {
 	var stats []api.Player
 
 	for _, player := range home {
@@ -122,7 +148,12 @@ func sortPlayers(home map[string]api.Player, away map[string]api.Player) []api.P
 	}
 
 	sort.Slice(stats[:], func(i, j int) bool {
-		return stats[i].Yards > stats[j].Yards
+		if statType == 0 {
+			return stats[i].Yards > stats[j].Yards
+		} else if statType == 1 {
+			return stats[i].Tkl > stats[j].Tkl
+		}
+		return []rune(stats[i].Name)[0] < []rune(stats[j].Name)[0]
 	})
 
 	return stats

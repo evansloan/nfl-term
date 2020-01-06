@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/gdamore/tcell"
 	"github.com/rivo/tview"
 
 	"github.com/evansloan/nfl-term/ui"
@@ -16,9 +17,27 @@ func NewApp() *App {
 		Application: tview.NewApplication(),
 		Layout:      ui.NewLayout(),
 	}
+
+	a.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
+		if event.Key() == tcell.KeyCtrlO {
+			a.Layout.PlayerStats.SwitchToPage("opage")
+			a.Layout.PlayerStats.SetActive("opage")
+		} else if event.Key() == tcell.KeyCtrlD {
+			a.Layout.PlayerStats.SwitchToPage("dpage")
+			a.Layout.PlayerStats.SetActive("dpage")
+		} else if event.Key() == tcell.KeyTab {
+			table := a.Layout.PlayerStats.ActivePage.SelectNext()
+			a.SetFocus(table)
+		} else if event.Key() == tcell.KeyEsc {
+			a.SetFocus(a.Layout.GameList)
+		}
+		return event
+	})
+
 	a.Layout.GameList.AddItem("Quit", "", 'q', func() {
 		a.Stop()
 	})
+
 	return a
 }
 
