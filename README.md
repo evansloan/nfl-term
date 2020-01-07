@@ -1,7 +1,7 @@
 # nfl-term
 
 
-![](https://user-images.githubusercontent.com/8287750/71776885-be0e4f80-2f66-11ea-9760-9da1e87db370.png)
+![](https://user-images.githubusercontent.com/8287750/71860176-d645b200-30bf-11ea-9ea5-3693ce7dd328.gif))
 
 ## Installing
 
@@ -18,7 +18,6 @@ Use cURL/wget (Make sure to download the correct release for your system)
 
 ```
 $ curl -o /usr/local/bin/nfl-term https://github.com/evansloan/nfl-term/releases/download/v0.0.1/nfl-term_darwin_amd64
-
 $ chmod +x /usr/local/bin/nfl-term
 ```
 
