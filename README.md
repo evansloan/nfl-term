@@ -1,7 +1,7 @@
 # nfl-term
 
 
-![](https://user-images.githubusercontent.com/8287750/71860176-d645b200-30bf-11ea-9ea5-3693ce7dd328.gif))
+![](https://user-images.githubusercontent.com/8287750/71860176-d645b200-30bf-11ea-9ea5-3693ce7dd328.gif)
 
 ## Installing
 
