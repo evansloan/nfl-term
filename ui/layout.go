@@ -36,7 +36,7 @@ func NewLayout() *Layout {
 		KeyBinds:     tview.NewTextView(),
 	}
 
-	l.KeyBinds.SetText("Ctrl+D - Switch to D stats | Ctrl+O - Switch to O stats | TAB - Change category | ESC - Back to game list")
+	l.KeyBinds.SetText("Ctrl+D - Switch to defense stats | Ctrl+O - Switch to offense stats | TAB - Change stat category | ESC - Back to game list")
 	l.KeyBinds.SetTextAlign(1)
 
 	l.Outer.SetRows(0, 1).
@@ -56,12 +56,12 @@ func NewLayout() *Layout {
 		AddItem(l.PlayerStats, 0, 1, 3, 4, 0, 0, true).
 		AddItem(l.ScoreSummary, 3, 0, 20, 5, 0, 0, true)
 
-	l.SetGameList()
+	l.setGameList()
 
 	return l
 }
 
-func (l *Layout) SetGameList() {
+func (l *Layout) setGameList() {
 	l.GameList.Clear()
 
 	games := api.Games()
@@ -69,11 +69,13 @@ func (l *Layout) SetGameList() {
 
 	for i, game := range games {
 		title := game.Home.Abbr + " vs. " + game.Away.Abbr
-		l.GameList.AddItem(title, "", gameSelectors[i], l.GameSelect(game))
+		l.GameList.AddItem(title, "", gameSelectors[i], l.gameSelect(game))
 	}
+
+	l.gameSelect(games[0])()
 }
 
-func (l *Layout) GameSelect(game *api.Game) func() {
+func (l *Layout) gameSelect(game *api.Game) func() {
 	return func() {
 		game.Update()
 		l.Scoreboard.SetScores(game)
