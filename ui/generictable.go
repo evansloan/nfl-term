@@ -58,3 +58,14 @@ func (g *GenericTable) SetIntCell(row int, col int, text int) *GenericTable {
 	g.SetTextCell(row, col, strconv.Itoa(text))
 	return g
 }
+
+// SetTextCell creates a customizable cell that contains text within
+// a table.
+//
+// Is the same as tview.Table.SetCell() but returns *GenericTable
+// instead of *tview.Table.
+func (g *GenericTable) SetCustomCell(row, col int, text string, color tcell.Color, align int) *GenericTable {
+	cell := &tview.TableCell{Text: text, Color: color, Align: align}
+	g.SetCell(row, col, cell)
+	return g
+}
