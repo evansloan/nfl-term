@@ -24,7 +24,7 @@ var teamColors = map[string]tcell.Color{
 	"LA":  tcell.ColorWhite,
 	"LAC": tcell.ColorPowderBlue,
 	"MIA": tcell.ColorSeaGreen,
-	"MIN": tcell.ColorPurple,
+	"MIN": tcell.ColorPlum,
 	"NYG": tcell.ColorRoyalBlue,
 	"NYJ": tcell.ColorDarkGreen,
 	"NE":  tcell.ColorBlue,
