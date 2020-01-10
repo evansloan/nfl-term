@@ -23,7 +23,7 @@ type Layout struct {
 
 // NewLayout creates a new Layout and arranges all
 // UI elements within it.
-func NewLayout() *Layout {
+func NewLayout(games []*api.Game) *Layout {
 	l := &Layout{
 		Outer:        tview.NewGrid(),
 		Inner:        tview.NewGrid(),
@@ -56,15 +56,14 @@ func NewLayout() *Layout {
 		AddItem(l.PlayerStats, 0, 1, 3, 4, 0, 0, true).
 		AddItem(l.ScoreSummary, 3, 0, 20, 5, 0, 0, true)
 
-	l.setGameList()
+	l.setGameList(games)
 
 	return l
 }
 
-func (l *Layout) setGameList() {
+func (l *Layout) setGameList(games []*api.Game) {
 	l.GameList.Clear()
 
-	games := api.Games()
 	gameSelectors := []rune{'1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g'}
 
 	for i, game := range games {

@@ -39,11 +39,37 @@ $ make install
 $ nfl-term
 ```
 
+### Arguments
+
+```
+-v, --version // Displays the version of nfl-term
+-g, --games <game ids> // Loads specific game stats
+```
+
+#### Constructing game IDs
+
+Game IDs follow this structure:
+```
+<year><month><day><game number>
+```
+
+Game numbers start at 00 so the first game played on a given day would be 00, the second 01, the third 02, etc...
+
+**Example**: The first game played on September 13th of the 2015 season would be: `2015091300`, the second `2015091301`, the third `2015091302`.
+
+**Finding a specific game number:**
+
+1. Go  to `http://www.nfl.com/schedules/<season>/REG1` where `<season>` is the year of the season of the game you would like. The link for the 2015 season would be http://www.nfl.com/schedules/2015/REG1
+
+2. Find the game within the list you would like to display stats for. Using the link above, we'll get the stats for Colts vs. Bills. It was the 4th game played on September 13, 2015 so its game id would be `20150901303`. Game numbers reset to 00 for each different day. So the Thursday night game of that same week (NE vs. PIT) would have a game ID of 00.
+
+
+
 ## TODO
 
 * Add responsive layout
 
-* Display stats from games of user's choice
+* Better error handling
 
 ## License
 

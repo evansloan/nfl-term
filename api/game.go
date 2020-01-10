@@ -77,6 +77,21 @@ type Player struct {
 	Ffum      int    `json:"ffum"`
 }
 
+// GetGames retrieves a list of NFL games that are in progress,
+// or have ended
+//
+// The IDs for the games are structured like so:
+//
+// 2020 (year) +  01 (month) + 04 (day) + 01 (game number 00-16)
+// = 2020010401
+func GetGames(ids []string) []*Game {
+	var games []*Game
+	for _, id := range ids {
+		games = append(games, GetGame(id))
+	}
+	return games
+}
+
 // GetGame retrieves a specific NFL game that is in progress,
 // or has ended.
 //

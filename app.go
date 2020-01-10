@@ -4,6 +4,7 @@ import (
 	"github.com/gdamore/tcell"
 	"github.com/rivo/tview"
 
+	"github.com/evansloan/nfl-term/api"
 	"github.com/evansloan/nfl-term/ui"
 )
 
@@ -12,10 +13,10 @@ type App struct {
 	Layout *ui.Layout
 }
 
-func NewApp() *App {
+func NewApp(games []*api.Game) *App {
 	a := &App{
 		Application: tview.NewApplication(),
-		Layout:      ui.NewLayout(),
+		Layout:      ui.NewLayout(games),
 	}
 
 	a.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
