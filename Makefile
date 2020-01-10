@@ -1,6 +1,6 @@
 .PHONY: install release
 
-VERSION=v0.0.1
+VERSION=v0.0.2
 ARTIFACTS_DIR=build/artifacts/$(VERSION)
 GITHUB_USERNAME=evansloan
 
