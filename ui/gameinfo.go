@@ -11,13 +11,13 @@ import (
 // relevant information of an NFL game.
 // Inherits from GenericTable
 type GameInfo struct {
-	*GenericTable
+	*DefaultTable
 }
 
 // NewGameInfo creates a new GameInfo UI element
 func NewGameInfo() *GameInfo {
 	return &GameInfo{
-		GenericTable: NewGenericTable("Game Info"),
+		DefaultTable: NewGenericTable("Game Info"),
 	}
 }
 

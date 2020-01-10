@@ -10,13 +10,13 @@ import (
 // ScoreSummary represents a UI element that displays
 // a brief description of all scoring plays in a game.
 type ScoreSummary struct {
-	*GenericTable
+	*DefaultTable
 }
 
 // NewScoreSummary creates a new ScoreSummary element
 func NewScoreSummary() *ScoreSummary {
 	return &ScoreSummary{
-		GenericTable: NewGenericTable("Score Summary"),
+		DefaultTable: NewGenericTable("Score Summary"),
 	}
 }
 

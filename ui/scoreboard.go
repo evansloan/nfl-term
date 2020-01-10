@@ -7,13 +7,13 @@ import (
 // Scoreboard represents a UI element that shows
 // the scores of an NFL game quarter by quarter
 type Scoreboard struct {
-	*GenericTable
+	*DefaultTable
 }
 
 // NewScoreboard creates a new Scoreboard element
 func NewScoreboard() *Scoreboard {
 	return &Scoreboard{
-		GenericTable: NewGenericTable("Scoreboard"),
+		DefaultTable: NewGenericTable("Scoreboard"),
 	}
 }
 

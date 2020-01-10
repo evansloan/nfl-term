@@ -12,7 +12,7 @@ import (
 //
 // Inherits from GenericTable
 type PlayerStats struct {
-	*GenericTable
+	*DefaultTable
 	SetStats func(game *api.Game)
 }
 
@@ -25,7 +25,7 @@ type PlayerStats struct {
 //
 func NewPlayerStats(title string, statType int) *PlayerStats {
 	p := &PlayerStats{
-		GenericTable: NewGenericTable(title),
+		DefaultTable: NewGenericTable(title),
 	}
 
 	p.SetFixed(1, 0)

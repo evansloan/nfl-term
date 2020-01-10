@@ -8,13 +8,13 @@ import (
 // TeamStats represents a UI element that displays
 // basic team stats for an NFL game.
 type TeamStats struct {
-	*GenericTable
+	*DefaultTable
 }
 
 // NewTeamStats creates a new TeamStats element.
 func NewTeamStats() *TeamStats {
 	return &TeamStats{
-		GenericTable: NewGenericTable("Team Stats"),
+		DefaultTable: NewGenericTable("Team Stats"),
 	}
 }
 
