@@ -5,6 +5,10 @@
 
 ## Installing
 
+Requires `go >= 1.12`
+
+[How to install Go](https://golang.org/doc/install)
+
 ### Binary
 
 Download the latest release for your system from the [releases page](https://github.com/evansloan/nfl-term/releases).
@@ -30,10 +34,6 @@ $ chmod +x /usr/local/bin/nfl-term
 ```
 
 ### Build from source
-
-Requires `go >= 1.12`
-
-[How to install Go](https://golang.org/doc/install)
 
 ```
 $ git clone https://github.com/evansloan/nfl-term.git
