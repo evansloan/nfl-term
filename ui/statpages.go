@@ -78,12 +78,14 @@ func NewStatPages() *StatPages {
 	return s
 }
 
+// setActive sets a new active statPage and switches to
+// it within the application
 func (s *StatPages) setActive(page *statPage) {
 	s.ActivePage = page
 	s.SwitchToPage(page.name)
 }
 
-// NextPage focuses the next stat page depending on
+// NextPage switches to the next stat page depending on
 // the current active stat page
 func (s *StatPages) NextPage() {
 	if s.ActivePage == s.oPage {
@@ -95,7 +97,7 @@ func (s *StatPages) NextPage() {
 	}
 }
 
-// PrevPage focuses the previous stat page depending on
+// PrevPage switches to the previous stat page depending on
 // the current active stat page
 func (s *StatPages) PrevPage() {
 	if s.ActivePage == s.oPage {
