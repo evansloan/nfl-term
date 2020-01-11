@@ -46,7 +46,11 @@ type Team struct {
 		Passing   map[string]Player `json:"passing"`
 		Rushing   map[string]Player `json:"rushing"`
 		Receiving map[string]Player `json:"receiving"`
-		Defense   map[string]Player `json:"defense:`
+		Defense   map[string]Player `json:"defense"`
+		Kicking   map[string]Player `json:"kicking"`
+		Punting   map[string]Player `json:"punting"`
+		KickRet   map[string]Player `json:"kickret"`
+		PuntRet   map[string]Player `json:"puntret"`
 		Team      struct {
 			FirstDowns int    `json:"totfd"`
 			TotalYards int    `json:"totyds"`
@@ -75,6 +79,16 @@ type Player struct {
 	Sacks     int    `json:"sck"`
 	IntsD     int    `json:"int"`
 	Ffum      int    `json:"ffum"`
+	Returns   int    `json:"ret"`
+	Avg       int    `json:"avg"`
+	Long      int    `json:"lng"`
+	LongTD    int    `json:"lngtd"`
+	FGMade    int    `json:"fgm"`
+	FGAtt     int    `json:"fga"`
+	XPMade    int    `json:"xpmade"`
+	XPAtt     int    `json:"xpa"`
+	Punts     int    `json:"pts"`
+	Inside20  int    `json:"i20"`
 }
 
 // GetGames retrieves a list of NFL games that are in progress,
