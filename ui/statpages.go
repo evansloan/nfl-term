@@ -66,9 +66,9 @@ func NewStatPages() *StatPages {
 		NewPlayerStats("Kick return", KickRet),
 		NewPlayerStats("Punt return", PuntRet),
 	}
-	s.oPage = newStatPage(oStats, "opage", 40, 30, 30, 0)
-	s.dPage = newStatPage(dStats, "dpage", 40, 0)
-	s.stPage = newStatPage(stStats, "stpage", 30, 30, 30, 30, 0)
+	s.oPage = newStatPage(oStats, "opage", 40, 40, 40)
+	s.dPage = newStatPage(dStats, "dpage", 40)
+	s.stPage = newStatPage(stStats, "stpage", 30, 30, 30, 30)
 
 	s.AddPage(s.oPage.name, s.oPage, true, true)
 	s.AddPage(s.dPage.name, s.dPage, true, false)

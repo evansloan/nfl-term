@@ -37,7 +37,7 @@ func NewPlayerStats(title string, statType StatType) *PlayerStats {
 		StatType:     statType,
 	}
 
-	p.SetFixed(1, 0)
+	p.SetFixed(1, 1)
 
 	if statType == Passing {
 		p.setHandler(p.setPassStats)
