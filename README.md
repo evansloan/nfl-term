@@ -11,6 +11,14 @@ Download the latest release for your system from the [releases page](https://git
 
 _or_
 
+Use Go modules
+
+```
+go get github.com/evansloan/nfl-term
+```
+
+_or_
+
 Use cURL/wget (Make sure to download the correct release for your system)
 
 - Mac: `nfl-term_darwin_amd64`
@@ -23,7 +31,7 @@ $ chmod +x /usr/local/bin/nfl-term
 
 ### Build from source
 
-Requires `go >= 1.12.7`
+Requires `go >= 1.12`
 
 [How to install Go](https://golang.org/doc/install)
 
