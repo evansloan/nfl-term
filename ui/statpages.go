@@ -95,7 +95,7 @@ func (s *StatPages) NextPage() {
 	}
 }
 
-// Prev focuses the previous stat page depending on
+// PrevPage focuses the previous stat page depending on
 // the current active stat page
 func (s *StatPages) PrevPage() {
 	if s.ActivePage == s.oPage {
@@ -107,6 +107,8 @@ func (s *StatPages) PrevPage() {
 	}
 }
 
+// SetStats populates the stat pages with their
+// respective stats
 func (s *StatPages) SetStats(game *api.Game) {
 	for _, stat := range s.oPage.Stats {
 		stat.SetStats(game)
