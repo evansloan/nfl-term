@@ -5,8 +5,7 @@ ARTIFACTS_DIR=build/artifacts/$(VERSION)
 GITHUB_USERNAME=evansloan
 
 install:
-	go build -ldflags="-X main.version=$(VERSION)" -o /usr/local/bin/nfl-term
-	chmod +x /usr/local/bin/nfl-term
+	go build -ldflags="-X main.version=$(VERSION)" -o ${GOPATH}/bin/nfl-term
 
 release:
 	GOOS=windows GOARCH=amd64 go build -o $(ARTIFACTS_DIR)/nfl-term_windows_amd64
