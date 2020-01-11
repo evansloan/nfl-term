@@ -36,7 +36,7 @@ func NewLayout(games []*api.Game) *Layout {
 		KeyBinds:     tview.NewTextView(),
 	}
 
-	l.KeyBinds.SetText("Ctrl+D - Switch to defense stats | Ctrl+O - Switch to offense stats | TAB - Change stat category | ESC - Back to game list")
+	l.KeyBinds.SetText("Ctrl+D - Next stat page | Ctrl+A - Prev stat page | TAB - Change stat category | ESC - Back to game list")
 	l.KeyBinds.SetTextAlign(1)
 
 	l.Outer.SetRows(0, 1).

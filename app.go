@@ -19,29 +19,31 @@ func NewApp(games []*api.Game) *App {
 		Layout:      ui.NewLayout(games),
 	}
 
-	a.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
-		if event.Key() == tcell.KeyCtrlO {
-			a.Layout.PlayerStats.SwitchToPage("opage")
-			a.Layout.PlayerStats.SetActive("opage")
-		} else if event.Key() == tcell.KeyCtrlD {
-			a.Layout.PlayerStats.SwitchToPage("dpage")
-			a.Layout.PlayerStats.SetActive("dpage")
-		} else if event.Key() == tcell.KeyTab {
-			table := a.Layout.PlayerStats.ActivePage.SelectNext()
-			a.SetFocus(table)
-		} else if event.Key() == tcell.KeyEsc {
-			a.SetFocus(a.Layout.GameList)
-		}
-		return event
-	})
-
 	a.Layout.GameList.AddItem("Quit", "", 'q', func() {
 		a.Stop()
 	})
+
+	a.setKeyBinds()
 
 	return a
 }
 
 func (a *App) RunApp() {
 	a.SetRoot(a.Layout.Outer, true).SetFocus(a.Layout.GameList).Run()
+}
+
+func (a *App) setKeyBinds() {
+	a.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
+		if event.Key() == tcell.KeyCtrlD {
+			a.Layout.PlayerStats.NextPage()
+		} else if event.Key() == tcell.KeyCtrlA {
+			a.Layout.PlayerStats.PrevPage()
+		} else if event.Key() == tcell.KeyTab {
+			table := a.Layout.PlayerStats.ActivePage.NextCategory()
+			a.SetFocus(table)
+		} else if event.Key() == tcell.KeyEsc {
+			a.SetFocus(a.Layout.GameList)
+		}
+		return event
+	})
 }

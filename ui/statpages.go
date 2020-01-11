@@ -8,13 +8,15 @@ import (
 type statPage struct {
 	*tview.Grid
 	Stats    []*PlayerStats
+	name     string
 	selected int
 }
 
-func newStatPage(stats []*PlayerStats, cols ...int) *statPage {
+func newStatPage(stats []*PlayerStats, name string, cols ...int) *statPage {
 	s := &statPage{
 		Grid:     tview.NewGrid(),
 		Stats:    stats,
+		name:     name,
 		selected: -1,
 	}
 
@@ -28,7 +30,7 @@ func newStatPage(stats []*PlayerStats, cols ...int) *statPage {
 	return s
 }
 
-func (s *statPage) SelectNext() *PlayerStats {
+func (s *statPage) NextCategory() *PlayerStats {
 	if s.selected+1 == len(s.Stats) {
 		s.selected = 0
 	} else {
@@ -64,25 +66,44 @@ func NewStatPages() *StatPages {
 		NewPlayerStats("Kick return", KickRet),
 		NewPlayerStats("Punt return", PuntRet),
 	}
-	s.oPage = newStatPage(oStats, 40, 30, 30, 0)
-	s.dPage = newStatPage(dStats, 60, 0)
-	s.stPage = newStatPage(stStats, 30, 30, 30, 30, 0)
+	s.oPage = newStatPage(oStats, "opage", 40, 30, 30, 0)
+	s.dPage = newStatPage(dStats, "dpage", 60, 0)
+	s.stPage = newStatPage(stStats, "stpage", 30, 30, 30, 30, 0)
 
-	s.AddPage("opage", s.oPage, true, true)
-	s.AddPage("dpage", s.dPage, true, false)
-	s.AddPage("stpage", s.stPage, true, false)
+	s.AddPage(s.oPage.name, s.oPage, true, true)
+	s.AddPage(s.dPage.name, s.dPage, true, false)
+	s.AddPage(s.stPage.name, s.stPage, true, false)
 	s.ActivePage = s.oPage
 
 	return s
 }
 
-func (s *StatPages) SetActive(pageName string) {
-	if pageName == "opage" {
-		s.ActivePage = s.oPage
-	} else if pageName == "dpage" {
-		s.ActivePage = s.dPage
-	} else if pageName == "stpage" {
-		s.ActivePage = s.stPage
+func (s *StatPages) setActive(page *statPage) {
+	s.ActivePage = page
+	s.SwitchToPage(page.name)
+}
+
+// NextPage focuses the next stat page depending on
+// the current active stat page
+func (s *StatPages) NextPage() {
+	if s.ActivePage == s.oPage {
+		s.setActive(s.dPage)
+	} else if s.ActivePage == s.dPage {
+		s.setActive(s.stPage)
+	} else if s.ActivePage == s.stPage {
+		s.setActive(s.oPage)
+	}
+}
+
+// Prev focuses the previous stat page depending on
+// the current active stat page
+func (s *StatPages) PrevPage() {
+	if s.ActivePage == s.oPage {
+		s.setActive(s.stPage)
+	} else if s.ActivePage == s.dPage {
+		s.setActive(s.oPage)
+	} else if s.ActivePage == s.stPage {
+		s.setActive(s.dPage)
 	}
 }
 
