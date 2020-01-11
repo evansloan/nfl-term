@@ -35,11 +35,11 @@ func (a *App) RunApp() {
 func (a *App) setKeyBinds() {
 	a.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
 		if event.Key() == tcell.KeyCtrlD {
-			a.Layout.PlayerStats.NextPage()
+			a.Layout.StatPages.NextPage()
 		} else if event.Key() == tcell.KeyCtrlA {
-			a.Layout.PlayerStats.PrevPage()
+			a.Layout.StatPages.PrevPage()
 		} else if event.Key() == tcell.KeyTab {
-			table := a.Layout.PlayerStats.ActivePage.NextCategory()
+			table := a.Layout.StatPages.ActivePage.NextCategory()
 			a.SetFocus(table)
 		} else if event.Key() == tcell.KeyEsc {
 			a.SetFocus(a.Layout.GameList)
