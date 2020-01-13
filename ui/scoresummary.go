@@ -9,6 +9,8 @@ import (
 
 // ScoreSummary represents a UI element that displays
 // a brief description of all scoring plays in a game.
+//
+// Inherits from DefaultTable
 type ScoreSummary struct {
 	*DefaultTable
 }
@@ -16,7 +18,7 @@ type ScoreSummary struct {
 // NewScoreSummary creates a new ScoreSummary element
 func NewScoreSummary() *ScoreSummary {
 	return &ScoreSummary{
-		DefaultTable: NewGenericTable("Score Summary"),
+		DefaultTable: NewDefaultTable("Score Summary"),
 	}
 }
 
@@ -25,10 +27,7 @@ func NewScoreSummary() *ScoreSummary {
 func (s *ScoreSummary) SetScoreSummary(game *api.Game) {
 	s.Clear()
 
-	s.SetHeaderCell(0, 0, "Type").
-		SetHeaderCell(0, 1, "Team").
-		SetHeaderCell(0, 2, "Quarter").
-		SetHeaderCell(0, 3, "Desc")
+	s.SetHeader("Type", "Team", "Quarter", "Desc")
 
 	// Convert scoring play IDs to ints in order to sort by time scored
 	var ids []int
