@@ -27,6 +27,7 @@ Use cURL/wget (Make sure to download the correct release for your system)
 
 - Mac: `nfl-term_darwin_amd64`
 - Linux: `nfl-term_linux_amd64`
+- Windows: `nfl-term_windows_amd64.exe`
 
 ```
 $ curl -o /usr/local/bin/nfl-term https://github.com/evansloan/nfl-term/releases/download/v0.0.2/nfl-term_darwin_amd64
