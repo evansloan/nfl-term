@@ -9,7 +9,8 @@ import (
 
 // GameInfo represents a UI element that displays
 // relevant information of an NFL game.
-// Inherits from GenericTable
+//
+// Inherits from DefaultTable
 type GameInfo struct {
 	*DefaultTable
 }
@@ -17,7 +18,7 @@ type GameInfo struct {
 // NewGameInfo creates a new GameInfo UI element
 func NewGameInfo() *GameInfo {
 	return &GameInfo{
-		DefaultTable: NewGenericTable("Game Info"),
+		DefaultTable: NewDefaultTable("Game Info"),
 	}
 }
 
@@ -43,11 +44,11 @@ func (g *GameInfo) SetInfo(game *api.Game) {
 		downStr = down + "th and " + togo
 	}
 
-	g.SetHeaderCell(0, 0, "Quarter:").
-		SetHeaderCell(1, 0, "Time:").
-		SetHeaderCell(2, 0, "Down:").
-		SetHeaderCell(3, 0, "Possession:").
-		SetHeaderCell(4, 0, "Yard line:")
+	g.SetHeaderCell(0, 0, "Quarter").
+		SetHeaderCell(1, 0, "Time").
+		SetHeaderCell(2, 0, "Down").
+		SetHeaderCell(3, 0, "Possession").
+		SetHeaderCell(4, 0, "Yard line")
 
 	g.SetTextCell(0, 1, strings.Title(game.Qtr)).
 		SetTextCell(1, 1, game.Clock).
