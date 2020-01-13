@@ -23,7 +23,7 @@ const (
 // the player stats from a specific NFL game.
 // Can display passing/rushing/receiving stats.
 //
-// Inherits from GenericTable
+// Inherits from DefaultTable
 type PlayerStats struct {
 	*DefaultTable
 	StatType StatType
@@ -33,7 +33,7 @@ type PlayerStats struct {
 // NewPlayerStats creates a new PlayerStats UI element
 func NewPlayerStats(title string, statType StatType) *PlayerStats {
 	p := &PlayerStats{
-		DefaultTable: NewGenericTable(title),
+		DefaultTable: NewDefaultTable(title),
 		StatType:     statType,
 	}
 
@@ -68,12 +68,7 @@ func (p *PlayerStats) setHandler(handler func(*api.Game)) {
 func (p *PlayerStats) setPassStats(game *api.Game) {
 	p.Clear()
 
-	p.SetHeaderCell(0, 0, "Name").
-		SetHeaderCell(0, 1, "Comp").
-		SetHeaderCell(0, 2, "Att").
-		SetHeaderCell(0, 3, "Yards").
-		SetHeaderCell(0, 4, "TDs").
-		SetHeaderCell(0, 5, "Ints")
+	p.SetHeader("Name", "Comp", "Att", "Yards", "TDs", "Ints")
 
 	stats := p.sortPlayers(game.Home.Stats.Passing, game.Away.Stats.Passing)
 
@@ -92,10 +87,7 @@ func (p *PlayerStats) setPassStats(game *api.Game) {
 func (p *PlayerStats) setRushStats(game *api.Game) {
 	p.Clear()
 
-	p.SetHeaderCell(0, 0, "Name").
-		SetHeaderCell(0, 1, "Att").
-		SetHeaderCell(0, 2, "Yards").
-		SetHeaderCell(0, 3, "TDs")
+	p.SetHeader("Name", "Att", "Yards", "TDs", "Long")
 
 	stats := p.sortPlayers(game.Home.Stats.Rushing, game.Away.Stats.Rushing)
 
@@ -103,7 +95,8 @@ func (p *PlayerStats) setRushStats(game *api.Game) {
 		p.SetTextCell(i+1, 0, player.Name).
 			SetIntCell(i+1, 1, player.Att).
 			SetIntCell(i+1, 2, player.Yards).
-			SetIntCell(i+1, 3, player.Tds)
+			SetIntCell(i+1, 3, player.Tds).
+			SetIntCell(i+1, 4, player.Long)
 	}
 }
 
@@ -112,10 +105,7 @@ func (p *PlayerStats) setRushStats(game *api.Game) {
 func (p *PlayerStats) setRecvStats(game *api.Game) {
 	p.Clear()
 
-	p.SetHeaderCell(0, 0, "Name").
-		SetHeaderCell(0, 1, "Rec").
-		SetHeaderCell(0, 2, "Yards").
-		SetHeaderCell(0, 3, "TDs")
+	p.SetHeader("Name", "Rec", "Yards", "TDs")
 
 	stats := p.sortPlayers(game.Home.Stats.Receiving, game.Away.Stats.Receiving)
 
@@ -132,12 +122,7 @@ func (p *PlayerStats) setRecvStats(game *api.Game) {
 func (p *PlayerStats) setDefStats(game *api.Game) {
 	p.Clear()
 
-	p.SetHeaderCell(0, 0, "Name").
-		SetHeaderCell(0, 1, "Tkls").
-		SetHeaderCell(0, 2, "Asts").
-		SetHeaderCell(0, 3, "Sacks").
-		SetHeaderCell(0, 4, "Ints").
-		SetHeaderCell(0, 5, "FFum")
+	p.SetHeader("Name", "Tkls", "Asts", "Sacks", "Ints", "FFum")
 
 	stats := p.sortPlayers(game.Home.Stats.Defense, game.Away.Stats.Defense)
 
@@ -155,11 +140,7 @@ func (p *PlayerStats) setDefStats(game *api.Game) {
 func (p *PlayerStats) setKickStats(game *api.Game) {
 	p.Clear()
 
-	p.SetHeaderCell(0, 0, "Name").
-		SetHeaderCell(0, 1, "FG Made").
-		SetHeaderCell(0, 2, "FG Att").
-		SetHeaderCell(0, 3, "XP Made").
-		SetHeaderCell(0, 4, "XP Att")
+	p.SetHeader("Name", "FG Made", "FG Att", "XP Made", "XP Att")
 
 	stats := p.sortPlayers(game.Home.Stats.Kicking, game.Away.Stats.Kicking)
 
@@ -176,10 +157,7 @@ func (p *PlayerStats) setKickStats(game *api.Game) {
 func (p *PlayerStats) setPuntStats(game *api.Game) {
 	p.Clear()
 
-	p.SetHeaderCell(0, 0, "Name").
-		SetHeaderCell(0, 1, "Punts").
-		SetHeaderCell(0, 2, "Yards").
-		SetHeaderCell(0, 3, "Inside 20")
+	p.SetHeader("Name", "Punts", "Yards", "Inside 20")
 
 	stats := p.sortPlayers(game.Home.Stats.Punting, game.Away.Stats.Punting)
 
@@ -195,12 +173,7 @@ func (p *PlayerStats) setPuntStats(game *api.Game) {
 func (p *PlayerStats) setReturnStats(game *api.Game) {
 	p.Clear()
 
-	p.SetHeaderCell(0, 0, "Name").
-		SetHeaderCell(0, 1, "Returns").
-		SetHeaderCell(0, 2, "Avg").
-		SetHeaderCell(0, 3, "Yards").
-		SetHeaderCell(0, 4, "TDs").
-		SetHeaderCell(0, 5, "Long")
+	p.SetHeader("Name", "Ret", "Avg", "Yards", "TDs", "Long")
 
 	var stats []api.Player
 
