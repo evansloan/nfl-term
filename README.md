@@ -70,8 +70,7 @@ Game numbers start at 00 so the first game played on a given day would be 00, th
 
 1. Go  to `http://www.nfl.com/schedules/<season>/REG1` where `<season>` is the year of the season of the game you would like. The link for the 2015 season would be http://www.nfl.com/schedules/2015/REG1
 
-2. Find the game within the list you would like to display stats for. Using the link above, we'll get the stats for Colts vs. Bills. It was the 4th game played on September 13, 2015 so its game ID would be `20150901303`. Game numbers reset to 00 for each different day. So the Thursday night game of that same week (NE vs. PIT) would have a game number of 00.
-
+2. Find the game within the list you would like to display stats for. Click on the Game Center link. The game ID is located within the Game Center URL. The ID within https://www.nfl.com/gamecenter/2015092009/2015/REG2/49ers@steelers is `2015092009`
 
 
 ## TODO
