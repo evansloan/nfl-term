@@ -17,7 +17,7 @@ type Layout struct {
 	GameInfo     *GameInfo
 	ScoreSummary *ScoreSummary
 	TeamStats    *TeamStats
-	PlayerStats  *StatPages
+	StatPages    *StatPages
 	KeyBinds     *tview.TextView
 }
 
@@ -32,11 +32,11 @@ func NewLayout(games []*api.Game) *Layout {
 		GameInfo:     NewGameInfo(),
 		ScoreSummary: NewScoreSummary(),
 		TeamStats:    NewTeamStats(),
-		PlayerStats:  NewStatPages(),
+		StatPages:    NewStatPages(),
 		KeyBinds:     tview.NewTextView(),
 	}
 
-	l.KeyBinds.SetText("Ctrl+D - Switch to defense stats | Ctrl+O - Switch to offense stats | TAB - Change stat category | ESC - Back to game list")
+	l.KeyBinds.SetText("Ctrl+D - Next stat page | Ctrl+A - Prev stat page | TAB - Change stat category | ESC - Back to game list")
 	l.KeyBinds.SetTextAlign(1)
 
 	l.Outer.SetRows(0, 1).
@@ -53,7 +53,7 @@ func NewLayout(games []*api.Game) *Layout {
 		AddItem(l.Scoreboard, 0, 0, 1, 1, 0, 0, false).
 		AddItem(l.GameInfo, 1, 0, 1, 1, 0, 0, false).
 		AddItem(l.TeamStats, 2, 0, 1, 1, 0, 0, false).
-		AddItem(l.PlayerStats, 0, 1, 3, 4, 0, 0, true).
+		AddItem(l.StatPages, 0, 1, 3, 4, 0, 0, true).
 		AddItem(l.ScoreSummary, 3, 0, 20, 5, 0, 0, true)
 
 	l.setGameList(games)
@@ -80,7 +80,7 @@ func (l *Layout) gameSelect(game *api.Game) func() {
 		l.Scoreboard.SetScores(game)
 		l.GameInfo.SetInfo(game)
 		l.TeamStats.SetStats(game)
-		l.PlayerStats.SetStats(game)
+		l.StatPages.SetStats(game)
 		l.ScoreSummary.SetScoreSummary(game)
 	}
 }

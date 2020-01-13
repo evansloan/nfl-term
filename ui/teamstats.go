@@ -3,10 +3,13 @@ package ui
 import (
 	"github.com/evansloan/nfl-term/api"
 	"github.com/gdamore/tcell"
+	"github.com/rivo/tview"
 )
 
 // TeamStats represents a UI element that displays
 // basic team stats for an NFL game.
+//
+// Inherits from DefaultTable
 type TeamStats struct {
 	*DefaultTable
 }
@@ -14,7 +17,7 @@ type TeamStats struct {
 // NewTeamStats creates a new TeamStats element.
 func NewTeamStats() *TeamStats {
 	return &TeamStats{
-		DefaultTable: NewGenericTable("Team Stats"),
+		DefaultTable: NewDefaultTable("Team Stats"),
 	}
 }
 
@@ -23,24 +26,24 @@ func NewTeamStats() *TeamStats {
 func (t *TeamStats) SetStats(game *api.Game) {
 	t.Clear()
 
-	t.SetColorCell(0, 0, game.Home.Abbr, teamColors[game.Home.Abbr]).
-		SetColorCell(0, 2, game.Away.Abbr, teamColors[game.Away.Abbr])
+	t.SetCustomCell(0, 0, game.Home.Abbr, teamColors[game.Home.Abbr], tview.AlignCenter).
+		SetCustomCell(0, 2, game.Away.Abbr, teamColors[game.Away.Abbr], tview.AlignCenter)
 
 	headerColor := tcell.ColorLightGray
-	t.SetCustomCell(1, 1, "Pass", headerColor, 1).
-		SetCustomCell(2, 1, "Rush", headerColor, 1).
-		SetCustomCell(3, 1, "Total", headerColor, 1).
-		SetCustomCell(4, 1, "Time of Pos", headerColor, 1).
-		SetCustomCell(5, 1, "Timeouts", headerColor, 1)
+	t.SetCustomCell(1, 1, "Pass", headerColor, tview.AlignCenter).
+		SetCustomCell(2, 1, "Rush", headerColor, tview.AlignCenter).
+		SetCustomCell(3, 1, "Total", headerColor, tview.AlignCenter).
+		SetCustomCell(4, 1, "Time of Pos", headerColor, tview.AlignCenter).
+		SetCustomCell(5, 1, "Timeouts", headerColor, tview.AlignCenter)
 
-	t.SetIntCell(1, 0, game.Home.Stats.Team.PassYards).
-		SetIntCell(1, 2, game.Away.Stats.Team.PassYards).
-		SetIntCell(2, 0, game.Home.Stats.Team.RushYards).
-		SetIntCell(2, 2, game.Away.Stats.Team.RushYards).
-		SetIntCell(3, 0, game.Home.Stats.Team.TotalYards).
-		SetIntCell(3, 2, game.Away.Stats.Team.TotalYards).
-		SetTextCell(4, 0, game.Home.Stats.Team.Top).
-		SetTextCell(4, 2, game.Away.Stats.Team.Top).
-		SetIntCell(5, 0, game.Home.Timeouts).
-		SetIntCell(5, 2, game.Away.Timeouts)
+	t.SetCustomIntCell(1, 0, game.Home.Stats.Team.PassYards, tcell.ColorWhite, tview.AlignCenter).
+		SetCustomIntCell(1, 2, game.Away.Stats.Team.PassYards, tcell.ColorWhite, tview.AlignCenter).
+		SetCustomIntCell(2, 0, game.Home.Stats.Team.RushYards, tcell.ColorWhite, tview.AlignCenter).
+		SetCustomIntCell(2, 2, game.Away.Stats.Team.RushYards, tcell.ColorWhite, tview.AlignCenter).
+		SetCustomIntCell(3, 0, game.Home.Stats.Team.TotalYards, tcell.ColorWhite, tview.AlignCenter).
+		SetCustomIntCell(3, 2, game.Away.Stats.Team.TotalYards, tcell.ColorWhite, tview.AlignCenter).
+		SetCustomCell(4, 0, game.Home.Stats.Team.Top, tcell.ColorWhite, tview.AlignCenter).
+		SetCustomCell(4, 2, game.Away.Stats.Team.Top, tcell.ColorWhite, tview.AlignCenter).
+		SetCustomIntCell(5, 0, game.Home.Timeouts, tcell.ColorWhite, tview.AlignCenter).
+		SetCustomIntCell(5, 2, game.Away.Timeouts, tcell.ColorWhite, tview.AlignCenter)
 }

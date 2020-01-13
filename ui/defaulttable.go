@@ -15,9 +15,9 @@ type DefaultTable struct {
 	*tview.Table
 }
 
-// NewGenericTable creates a new Table element and
+// NewDefaultTable creates a new Table element and
 // applies basic styling.
-func NewGenericTable(title string) *DefaultTable {
+func NewDefaultTable(title string) *DefaultTable {
 	g := &DefaultTable{
 		Table: tview.NewTable(),
 	}
@@ -70,4 +70,11 @@ func (g *DefaultTable) SetCustomCell(row, col int, text string, color tcell.Colo
 // its text value.
 func (g *DefaultTable) SetCustomIntCell(row, col, text int, color tcell.Color, align int) *DefaultTable {
 	return g.SetCustomCell(row, col, strconv.Itoa(text), color, align)
+}
+
+func (g *DefaultTable) SetHeader(headerText ...string) *DefaultTable {
+	for i, text := range headerText {
+		g.SetHeaderCell(0, i, text)
+	}
+	return g
 }
