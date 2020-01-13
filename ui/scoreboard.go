@@ -6,6 +6,8 @@ import (
 
 // Scoreboard represents a UI element that shows
 // the scores of an NFL game quarter by quarter
+//
+// Inherits from DefaultTable
 type Scoreboard struct {
 	*DefaultTable
 }
@@ -13,7 +15,7 @@ type Scoreboard struct {
 // NewScoreboard creates a new Scoreboard element
 func NewScoreboard() *Scoreboard {
 	return &Scoreboard{
-		DefaultTable: NewGenericTable("Scoreboard"),
+		DefaultTable: NewDefaultTable("Scoreboard"),
 	}
 }
 
@@ -21,13 +23,8 @@ func NewScoreboard() *Scoreboard {
 // scores of a game.
 func (s *Scoreboard) SetScores(game *api.Game) {
 	s.Clear()
-	s.SetHeaderCell(0, 0, "Team").
-		SetHeaderCell(0, 1, "Q1").
-		SetHeaderCell(0, 2, "Q2").
-		SetHeaderCell(0, 3, "Q3").
-		SetHeaderCell(0, 4, "Q4").
-		SetHeaderCell(0, 5, "OT").
-		SetHeaderCell(0, 6, "F")
+
+	s.SetHeader("Team", "Q1", "Q2", "Q3", "Q4", "OT", "F")
 
 	s.SetColorCell(1, 0, game.Home.Abbr, teamColors[game.Home.Abbr]).
 		SetIntCell(1, 1, game.Home.Score.Q1).
