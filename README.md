@@ -13,6 +13,10 @@ Requires `go >= 1.12`
 
 Download the latest release for your system from the [releases page](https://github.com/evansloan/nfl-term/releases).
 
+- Mac: `nfl-term_darwin_amd64`
+- Linux: `nfl-term_linux_amd64`
+- Windows: `nfl-term_windows_amd64.exe`
+
 _or_
 
 Use Go modules
@@ -24,10 +28,6 @@ go get github.com/evansloan/nfl-term
 _or_
 
 Use cURL/wget (Make sure to download the correct release for your system)
-
-- Mac: `nfl-term_darwin_amd64`
-- Linux: `nfl-term_linux_amd64`
-- Windows: `nfl-term_windows_amd64.exe`
 
 ```
 $ curl -o /usr/local/bin/nfl-term https://github.com/evansloan/nfl-term/releases/download/v0.0.3/nfl-term_darwin_amd64
