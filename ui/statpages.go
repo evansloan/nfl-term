@@ -5,6 +5,8 @@ import (
 	"github.com/rivo/tview"
 )
 
+// statPage contains all the stat tables for a
+// given stat type
 type statPage struct {
 	*tview.Grid
 	Stats    []*PlayerStats
@@ -30,6 +32,8 @@ func newStatPage(stats []*PlayerStats, name string, cols ...int) *statPage {
 	return s
 }
 
+// NextCategory returns the next stat table to be
+// focused within the app
 func (s *statPage) NextCategory() *PlayerStats {
 	if s.selected+1 == len(s.Stats) {
 		s.selected = 0
@@ -39,6 +43,7 @@ func (s *statPage) NextCategory() *PlayerStats {
 	return s.Stats[s.selected]
 }
 
+// StatPages is a container that holds all statPage elements
 type StatPages struct {
 	*tview.Pages
 	oPage      *statPage
@@ -47,6 +52,7 @@ type StatPages struct {
 	ActivePage *statPage
 }
 
+// NewStatPages creates statPage elements for all stat types
 func NewStatPages() *StatPages {
 	s := &StatPages{
 		Pages: tview.NewPages(),
@@ -67,7 +73,7 @@ func NewStatPages() *StatPages {
 		NewPlayerStats("Punt return", PuntRet),
 	}
 	s.oPage = newStatPage(oStats, "opage", 40, 40, 40)
-	s.dPage = newStatPage(dStats, "dpage", 40)
+	s.dPage = newStatPage(dStats, "dpage", 40, 0)
 	s.stPage = newStatPage(stStats, "stpage", 30, 30, 30, 30)
 
 	s.AddPage(s.oPage.name, s.oPage, true, true)
