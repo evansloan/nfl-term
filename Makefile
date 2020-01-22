@@ -1,6 +1,6 @@
 .PHONY: install release
 
-VERSION=v0.0.3
+VERSION=$(shell git describe --abbrev=0 --tags)
 ARTIFACTS_DIR=build/artifacts/$(VERSION)
 GITHUB_USERNAME=evansloan
 FLAGS="-X main.version=$(VERSION)"
