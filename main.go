@@ -27,6 +27,8 @@ func main() {
 				os.Exit(3)
 			}
 			games = api.GetGames(os.Args[2:len(os.Args)])
+		} else {
+			fmt.Println("Invalid argument.")
 		}
 	} else {
 		games = api.Games()
