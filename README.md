@@ -1,5 +1,7 @@
 # nfl-term
 
+The NFL has removed access to their Game Center data feed, this program is not operational at the time being.
+
 
 ![](https://user-images.githubusercontent.com/8287750/72228447-a6d9ee00-3574-11ea-9278-cd6fe8b6990a.gif)
 
